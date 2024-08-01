@@ -1,5 +1,6 @@
 import 'package:flavor_fiesta/core/res/media/app_media.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
+import 'package:flavor_fiesta/core/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,24 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Home',
-            style: AppStyles.headLineStyle2
-                .copyWith(color: AppStyles.paletteBlack),
-          ),
-          backgroundColor: AppStyles.paletteDark,
-          actions: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image:
-                      const DecorationImage(image: AssetImage(AppMedia.logo))),
-            )
-          ],
-        ),
+        appBar: const CustomAppbar(title: 'Home', showBackButton: false),
         body: Container(
             width: size.width,
             height: size.height,

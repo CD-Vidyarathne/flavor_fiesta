@@ -13,11 +13,17 @@ class AppStyles {
   static TextStyle textStyle =
       TextStyle(fontSize: 16, color: paletteGrey, fontWeight: FontWeight.w500);
 
+  static TextStyle textBlackStyle1 =
+      TextStyle(fontSize: 18, color: blackColor, fontWeight: FontWeight.bold);
+
+  static TextStyle textBlackStyle2 =
+      TextStyle(fontSize: 16, color: blackColor, fontWeight: FontWeight.w400);
+
   static TextStyle headLineStyle1 =
-      TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: paletteGrey);
+      TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: paletteBlack);
 
   static TextStyle headLineStyle2 =
-      TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: paletteGrey);
+      TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: paletteBlack);
 
   static TextStyle headLineStyle3 =
       TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: paletteGrey);

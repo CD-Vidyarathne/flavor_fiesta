@@ -1,5 +1,6 @@
-import 'package:flavor_fiesta/core/res/media/app_media.dart';
-import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
+import 'package:flavor_fiesta/core/res/sampledata/app_data.dart';
+import 'package:flavor_fiesta/core/widgets/custom_appbar.dart';
+import 'package:flavor_fiesta/core/widgets/single_order_card.dart';
 import 'package:flutter/material.dart';
 
 class OrderHistoryScreen extends StatelessWidget {
@@ -8,23 +9,14 @@ class OrderHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Order Now',
-          style:
-              AppStyles.headLineStyle2.copyWith(color: AppStyles.paletteBlack),
-        ),
-        backgroundColor: AppStyles.paletteDark,
-        actions: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: const DecorationImage(image: AssetImage(AppMedia.logo))),
-          )
-        ],
-      ),
-    );
+        appBar:
+            const CustomAppbar(title: 'Order History', showBackButton: false),
+        body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: orderData
+                  .map((order) => SingleOrderCard(order: order))
+                  .toList(),
+            )));
   }
 }
