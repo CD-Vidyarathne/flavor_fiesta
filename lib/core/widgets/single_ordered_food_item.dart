@@ -23,11 +23,11 @@ class SingleOrderFoodItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(item.name, style: AppStyles.textBlackStyle1),
+          Text(item.food.name, style: AppStyles.textBlackStyle1),
           const SizedBox(height: 10.0),
-          Text('Size: ${item.size}', style: AppStyles.textBlackStyle2),
+          Text('Size: ${item.selectedSize}', style: AppStyles.textBlackStyle2),
           const SizedBox(height: 10.0),
-          Text('Toppings: ${item.toppings.join(', ')}',
+          Text('Toppings: ${item.selectedToppings.join(', ')}',
               style: AppStyles.textBlackStyle2),
           const SizedBox(height: 10.0),
           Row(

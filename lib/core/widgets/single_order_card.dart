@@ -26,12 +26,12 @@ class SingleOrderCard extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             Text(
-              "${order.foods[0].name}....",
+              "${order.foods[0].food.name}....",
               style: AppStyles.textBlackStyle1,
             ),
             const SizedBox(height: 10.0),
             Text(
-              '${order.shop} shop',
+              '${order.shop.location} Branch',
               style: AppStyles.textBlackStyle2,
             ),
             const SizedBox(height: 10.0),

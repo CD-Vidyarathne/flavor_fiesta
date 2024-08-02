@@ -51,7 +51,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         style:
                             AppStyles.textBlackStyle1.copyWith(fontSize: 16)),
                     const SizedBox(width: 10),
-                    Text(order.shop,
+                    Text(order.shop.location,
                         style: AppStyles.textBlackStyle1.copyWith(
                             fontSize: 16, fontWeight: FontWeight.w400)),
                   ],

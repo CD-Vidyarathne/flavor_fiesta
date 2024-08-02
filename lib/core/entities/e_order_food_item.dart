@@ -1,29 +1,37 @@
+import 'package:flavor_fiesta/core/entities/e_food.dart';
+
 class OrderFoodItem {
-  final String name;
-  final String size;
-  final List<String> toppings;
+  final Food food;
+  final String selectedSize;
+  final List<String> selectedToppings;
   final double price;
+  final int quantity;
 
   OrderFoodItem(
-      {required this.name,
-      required this.size,
-      required this.toppings,
-      required this.price});
+      {required this.food,
+      required this.selectedSize,
+      required this.selectedToppings,
+      this.quantity = 1})
+      : price = calculatePrice(food, selectedSize, selectedToppings, quantity);
 
-  factory OrderFoodItem.fromMap(Map<String, dynamic> map) {
-    return OrderFoodItem(
-        name: map['name'],
-        size: map['size'],
-        toppings: List<String>.from(map['toppings']),
-        price: map['price']);
-  }
+  static double calculatePrice(Food food, String selectedSize,
+      List<String> selectedToppings, int quantity) {
+    double basePrice = food.price;
+    double sizePrice = 0;
 
-  Map<String, dynamic> toMap() {
-    return {'name': name, 'size': size, 'toppings': toppings, 'price': price};
+    if (selectedSize == 'Medium') {
+      sizePrice = food.priceInForMd;
+    } else if (selectedSize == 'Large') {
+      sizePrice = food.priceInForLg;
+    }
+
+    double toppingsPrice = selectedToppings.length * 200;
+
+    return (basePrice + sizePrice + toppingsPrice) * quantity;
   }
 
   @override
   String toString() {
-    return 'OrderFoodItem(name: $name, size: $size, toppings: $toppings, price: $price)';
+    return 'OrderFoodItem(name: $food.name, size: $selectedSize, toppings: $selectedToppings, price: $price)';
   }
 }

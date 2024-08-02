@@ -1,31 +1,21 @@
 class Food {
+  final String foodId;
   final String name;
   final List<String> availableSizes;
   final List<String> availableToppings;
   final double price;
+  final double priceInForSm = 0;
+  final double priceInForMd;
+  final double priceInForLg;
 
   Food(
-      {required this.name,
+      {required this.foodId,
+      required this.name,
       required this.availableSizes,
       required this.availableToppings,
-      required this.price});
-
-  factory Food.fromMap(Map<String, dynamic> map) {
-    return Food(
-        name: map['name'],
-        availableSizes: List<String>.from(map['availableSizes']),
-        availableToppings: List<String>.from(map['availableToppings']),
-        price: map['price']);
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'availableSizes': availableSizes,
-      'availableToppings': availableToppings,
-      'price': price
-    };
-  }
+      required this.price,
+      this.priceInForMd = 0,
+      this.priceInForLg = 0});
 
   @override
   String toString() {

@@ -31,7 +31,7 @@ class AppStyles {
   static TextStyle headLineStyle4 =
       TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: paletteGrey);
 
-  static final ButtonStyle darkButton = ElevatedButton.styleFrom(
+  static ButtonStyle darkButton = ElevatedButton.styleFrom(
     backgroundColor: paletteBlack,
     foregroundColor: paletteMedium,
     textStyle: textStyle,
@@ -40,16 +40,40 @@ class AppStyles {
       borderRadius: BorderRadius.circular(8),
     ),
   );
-  static final ButtonStyle lightButton = ElevatedButton.styleFrom(
+  static ButtonStyle lightButton = ElevatedButton.styleFrom(
     backgroundColor: paletteMedium,
     foregroundColor: paletteBlack,
     textStyle: textStyle,
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: paletteBlack, // Border color
+        width: 2.0, // Border width
+      ),
     ),
   );
-  static final ButtonStyle redButton = ElevatedButton.styleFrom(
+  static ButtonStyle darkButtonSquare = ElevatedButton.styleFrom(
+    backgroundColor: paletteBlack,
+    foregroundColor: paletteMedium,
+    textStyle: textStyle,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+  );
+  static ButtonStyle lightButtonSquare = ElevatedButton.styleFrom(
+    backgroundColor: paletteMedium,
+    foregroundColor: paletteBlack,
+    textStyle: textStyle,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: paletteBlack, // Border color
+        width: 2.0, // Border width
+      ),
+    ),
+  );
+  static ButtonStyle redButton = ElevatedButton.styleFrom(
     backgroundColor: redColor,
     foregroundColor: paletteMedium,
     textStyle: textStyle,
