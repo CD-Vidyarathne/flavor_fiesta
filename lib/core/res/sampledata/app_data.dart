@@ -2,6 +2,7 @@ import 'package:flavor_fiesta/core/entities/e_food.dart';
 import 'package:flavor_fiesta/core/entities/e_order.dart';
 import 'package:flavor_fiesta/core/entities/e_order_food_item.dart';
 import 'package:flavor_fiesta/core/entities/e_shop.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // -----Sample Foods----
 Food chiliChicken = Food(
@@ -46,7 +47,8 @@ Food margheritaPizza = Food(
 // -----Sample Shops----
 Shop shop1 = Shop(
   shopId: '328',
-  location: 'Nugegoda',
+  location: 'Arcade Square',
+  mapLocation: const LatLng(6.902888498043025, 79.86938023168656),
   availableItems: [
     chiliChicken.foodId,
     veggiePizza.foodId,
@@ -57,13 +59,15 @@ Shop shop1 = Shop(
 
 Shop shop2 = Shop(
   shopId: '329',
-  location: 'Colombo',
+  location: 'Boralla',
+  mapLocation: const LatLng(6.909686196053032, 79.87722206646745),
   availableItems: [pepperoniPizza.foodId, margheritaPizza.foodId],
 );
 
 Shop shop3 = Shop(
   shopId: '330',
-  location: 'Kandy',
+  location: 'Liberty Plaza',
+  mapLocation: const LatLng(6.911988910408117, 79.85158322887986),
   availableItems: [
     veggiePizza.foodId,
     chiliChicken.foodId,
@@ -71,6 +75,59 @@ Shop shop3 = Shop(
   ],
 );
 
+Shop shop4 = Shop(
+  shopId: '331',
+  location: 'Galle Face',
+  mapLocation: const LatLng(6.926108128852529, 79.84464574248112),
+  availableItems: [
+    veggiePizza.foodId,
+    chiliChicken.foodId,
+    pepperoniPizza.foodId
+  ],
+);
+Shop shop5 = Shop(
+  shopId: '332',
+  location: 'Maradana',
+  mapLocation: const LatLng(6.929253109758005, 79.86397924895076),
+  availableItems: [
+    veggiePizza.foodId,
+    chiliChicken.foodId,
+    pepperoniPizza.foodId
+  ],
+);
+
+Shop shop6 = Shop(
+  shopId: '333',
+  location: 'Pettah',
+  mapLocation: const LatLng(6.936048914579842, 79.84294523321266),
+  availableItems: [
+    veggiePizza.foodId,
+    chiliChicken.foodId,
+    pepperoniPizza.foodId
+  ],
+);
+
+Shop shop7 = Shop(
+  shopId: '334',
+  location: 'Peliyagoda',
+  mapLocation: const LatLng(6.959062006221287, 79.89133102018832),
+  availableItems: [
+    veggiePizza.foodId,
+    chiliChicken.foodId,
+    pepperoniPizza.foodId
+  ],
+);
+
+Shop shop8 = Shop(
+  shopId: '335',
+  location: 'Rajagiriya',
+  mapLocation: const LatLng(6.9089563432413446, 79.89634880085082),
+  availableItems: [
+    veggiePizza.foodId,
+    chiliChicken.foodId,
+    pepperoniPizza.foodId
+  ],
+);
 // -----Sample items----
 OrderFoodItem orderFoodItem1 = OrderFoodItem(
   food: chiliChicken,
@@ -136,5 +193,5 @@ List<Food> foodData = [
   margheritaPizza,
   pepperoniPizza
 ];
-List<Shop> shopData = [shop1, shop2, shop3];
+List<Shop> shopData = [shop1, shop2, shop3, shop4, shop5, shop6, shop7, shop8];
 List<Order> orderData = [order1, order2, order3];

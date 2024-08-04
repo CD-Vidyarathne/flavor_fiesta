@@ -4,8 +4,8 @@ class OrderFoodItem {
   final Food food;
   final String selectedSize;
   final List<String> selectedToppings;
-  final double price;
-  final int quantity;
+  double price;
+  int quantity;
 
   OrderFoodItem(
       {required this.food,

@@ -7,6 +7,7 @@ class Order {
   final Shop shop;
   final List<OrderFoodItem> foods;
   final double totalPrice;
+  String? promoCode;
   final DateTime date;
   final String paymentMethod;
   final String deliveryLocation;
@@ -19,6 +20,7 @@ class Order {
     required this.totalPrice,
     required this.date,
     required this.paymentMethod,
+    this.promoCode = "",
     required this.deliveryLocation,
   });
 

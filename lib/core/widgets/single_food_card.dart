@@ -121,6 +121,9 @@ class _SingleFoodCardState extends State<SingleFoodCard> {
                   quantity: quantity,
                 );
                 widget.addToCart(orderFoodItem);
+                quantity = 1;
+                selectedToppings = [];
+                selectedSize = 'Small';
               },
               style: AppStyles.darkButton,
               child: const Icon(Icons.add),

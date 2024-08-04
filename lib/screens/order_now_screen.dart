@@ -1,5 +1,6 @@
 import 'package:flavor_fiesta/core/entities/e_cart.dart';
 import 'package:flavor_fiesta/core/entities/e_food.dart';
+import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
 import 'package:flavor_fiesta/core/res/sampledata/app_data.dart';
 import 'package:flavor_fiesta/core/entities/e_shop.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
@@ -8,6 +9,7 @@ import 'package:flavor_fiesta/core/widgets/single_food_card.dart';
 import 'package:flavor_fiesta/screens/view_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flavor_fiesta/core/entities/e_order_food_item.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class OrderNowScreen extends StatefulWidget {
   const OrderNowScreen({super.key});
@@ -25,7 +27,8 @@ class _OrderNowScreenState extends State<OrderNowScreen> {
 
   Shop getSelectedShop() {
     return shops.firstWhere((shop) => shop.shopId == _selectedShopId,
-        orElse: () => Shop(shopId: '', location: ''));
+        orElse: () =>
+            Shop(shopId: '', location: '', mapLocation: const LatLng(0, 0)));
   }
 
   Food getFoodByFoodId(String id) {
@@ -111,9 +114,13 @@ class _OrderNowScreenState extends State<OrderNowScreen> {
                             isExpanded: true,
                           ),
                           const SizedBox(height: 16),
-                          Text(
-                            'Find the nearest branch>>',
-                            style: AppStyles.textBlackStyle1,
+                          InkWell(
+                            onTap: () =>
+                                Navigator.pushNamed(context, AppRoutes.map),
+                            child: Text(
+                              'Find the nearest branch>>',
+                              style: AppStyles.textBlackStyle1,
+                            ),
                           ),
                           if (selectedShop.shopId != "")
                             Column(
@@ -154,8 +161,9 @@ class _OrderNowScreenState extends State<OrderNowScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    ViewCartScreen(cartItems: cart.items)),
+                                builder: (context) => ViewCartScreen(
+                                      cart: cart,
+                                    )),
                           );
                         },
                         style: AppStyles.lightButton,
