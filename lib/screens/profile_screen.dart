@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_fiesta/core/res/media/app_media.dart';
 import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
@@ -14,11 +15,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _currentPasswordController =
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController currentPasswordController =
       TextEditingController();
-  final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmNewPasswordController =
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmNewPasswordController =
       TextEditingController();
 
   Uint8List? _image;
@@ -26,11 +27,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void dispose() {
-    _addressController.dispose();
-    _currentPasswordController.dispose();
-    _newPasswordController.dispose();
-    _confirmNewPasswordController.dispose();
+    addressController.dispose();
+    currentPasswordController.dispose();
+    newPasswordController.dispose();
+    confirmNewPasswordController.dispose();
     super.dispose();
+  }
+
+  void logoutUser() {
+    FirebaseAuth.instance.signOut();
+    Navigator.pushNamed(context, AppRoutes.login);
   }
 
   @override
@@ -47,12 +53,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             padding: const EdgeInsets.only(right: 10),
             child: ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, AppRoutes.login),
+              onPressed: logoutUser,
               style: AppStyles.redButton,
               child: const Text('Sign Out'),
             ),
           ),
         ],
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -142,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextField(
-                    controller: _addressController,
+                    controller: addressController,
                     decoration: const InputDecoration(
                       labelText: 'Default Address',
                       border: OutlineInputBorder(),
@@ -179,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextField(
-                    controller: _currentPasswordController,
+                    controller: currentPasswordController,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Current Password',
@@ -188,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 16.0),
                   TextField(
-                    controller: _newPasswordController,
+                    controller: newPasswordController,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'New Password',
@@ -197,7 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 16.0),
                   TextField(
-                    controller: _confirmNewPasswordController,
+                    controller: confirmNewPasswordController,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Confirm New Password',

@@ -1,22 +1,32 @@
-class User {
+class AppUser {
   final String userId;
   final bool isAdmin;
-  final bool isAuthenticated;
   final String userName;
   final String email;
   String? profilePictureURL;
   String? defaultAddress;
   List<String> previousOrders;
 
-  User(
-      {this.userId = "0000",
+  AppUser(
+      {required this.userId,
       this.isAdmin = false,
-      this.isAuthenticated = false,
       required this.userName,
       required this.email,
-      this.profilePictureURL,
-      this.defaultAddress,
+      this.profilePictureURL = "",
+      this.defaultAddress = "",
       required this.previousOrders});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'userId': userId,
+      'isAdmin': isAdmin,
+      'userName': userName,
+      'email': email,
+      'profilePictureURL': profilePictureURL,
+      'defaultAddress': defaultAddress,
+      'previousOrders': previousOrders,
+    };
+  }
 
   void checkOut(String orderId) {
     previousOrders.add(orderId);

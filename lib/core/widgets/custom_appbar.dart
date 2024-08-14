@@ -33,6 +33,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               image: const DecorationImage(image: AssetImage(AppMedia.logo))),
         )
       ],
+      automaticallyImplyLeading: false,
     );
   }
 

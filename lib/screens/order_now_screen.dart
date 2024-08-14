@@ -56,7 +56,6 @@ class _OrderNowScreenState extends State<OrderNowScreen> {
   void onShopChanged(String? newValue) {
     setState(() {
       _selectedShopId = newValue;
-      // Clear cart when the branch is changed
       clearCart();
     });
   }
