@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
 import 'package:flavor_fiesta/core/widgets/navigator_bar.dart';
 import 'package:flavor_fiesta/firebase_options.dart';
+import 'package:flavor_fiesta/screens/add_new_food_screen.dart';
 import 'package:flavor_fiesta/screens/add_new_shop_screen.dart';
-import 'package:flavor_fiesta/screens/google_map_screen.dart';
 import 'package:flavor_fiesta/screens/landing_screen.dart';
 import 'package:flavor_fiesta/screens/login_screen.dart';
 import 'package:flavor_fiesta/screens/signup_screen.dart';
@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
         "/": (context) => const LandingScreen(),
         AppRoutes.login: (context) => const LoginScreen(),
         AppRoutes.signup: (context) => const SignupScreen(),
-        AppRoutes.map: (context) => const GoogleMapScreen(),
         AppRoutes.authenticated: (context) => const NavigatorBar(),
-        AppRoutes.addNewShop: (context) => const AddNewShopScreen()
+        AppRoutes.addNewShop: (context) => const AddNewShopScreen(),
+        AppRoutes.addNewFood: (context) => const AddNewFoodScreen()
       },
     );
   }

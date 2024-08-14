@@ -4,7 +4,7 @@ import 'package:flavor_fiesta/screens/order_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class SingleOrderCard extends StatelessWidget {
-  final Order order;
+  final AppOrder order;
 
   const SingleOrderCard({super.key, required this.order});
 
@@ -31,7 +31,7 @@ class SingleOrderCard extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             Text(
-              '${order.shop.location} Branch',
+              '${order.shopId} Branch',
               style: AppStyles.textBlackStyle2,
             ),
             const SizedBox(height: 10.0),

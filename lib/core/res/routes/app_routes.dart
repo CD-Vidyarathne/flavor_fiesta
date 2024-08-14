@@ -4,4 +4,5 @@ class AppRoutes {
   static String authenticated = "/authenticated";
   static String map = "/map";
   static String addNewShop = "/addNewShop";
+  static String addNewFood = "/addNewFood";
 }

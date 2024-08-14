@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_fiesta/core/entities/e_cart.dart';
+import 'package:flavor_fiesta/core/helpers/helper_functions.dart';
 import 'package:flavor_fiesta/core/res/constants/promo_codes.dart';
 import 'package:flavor_fiesta/core/widgets/custom_appbar.dart';
 import 'package:flavor_fiesta/core/widgets/delivery_details.dart';
@@ -6,11 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flavor_fiesta/core/entities/e_order_food_item.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
 import 'package:flavor_fiesta/core/widgets/single_cart_item.dart';
+import 'package:flavor_fiesta/core/entities/e_order.dart';
 
 class ViewCartScreen extends StatefulWidget {
   final Cart cart;
+  final String shopId;
 
-  const ViewCartScreen({super.key, required this.cart});
+  const ViewCartScreen({super.key, required this.cart, required this.shopId});
 
   @override
   _ViewCartScreenState createState() => _ViewCartScreenState();
@@ -20,6 +25,7 @@ class _ViewCartScreenState extends State<ViewCartScreen> {
   final TextEditingController promoCodeController = TextEditingController();
   PromoCode? appliedPromoCode;
 
+  final User? currentUser = FirebaseAuth.instance.currentUser;
   void handleRemove(OrderFoodItem item) {
     setState(() {
       widget.cart.removeItem(item);
@@ -62,6 +68,27 @@ class _ViewCartScreenState extends State<ViewCartScreen> {
       total -= total * appliedPromoCode!.discount;
     }
     return total;
+  }
+
+  void checkout() async {
+    final order = AppOrder(
+      userEmail: currentUser!.email!,
+      shopId: widget.shopId,
+      foods: widget.cart.items,
+      totalPrice: getTotalPrice(),
+      date: DateTime.now(),
+      paymentMethod: "Credit Card",
+      deliveryLocation: "userAddress",
+      status: "Waiting",
+      promoCode: appliedPromoCode != null ? appliedPromoCode.toString() : null,
+    );
+
+    await FirebaseFirestore.instance
+        .collection('Orders')
+        .doc()
+        .set(order.toMap());
+
+    displayMessageToUser("Order Created", context);
   }
 
   @override
@@ -134,7 +161,7 @@ class _ViewCartScreenState extends State<ViewCartScreen> {
               style: AppStyles.textBlackStyle1,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: checkout,
               style: AppStyles.darkButton,
               child: Text('Checkout',
                   style: AppStyles.headLineStyle3

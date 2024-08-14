@@ -154,39 +154,6 @@ OrderFoodItem orderFoodItem4 = OrderFoodItem(
 );
 // -----Sample Orders-----
 
-Order order1 = Order(
-  orderId: '22784',
-  userId: '4345',
-  shop: shop1,
-  foods: [orderFoodItem1, orderFoodItem2],
-  totalPrice: orderFoodItem1.price + orderFoodItem2.price,
-  date: DateTime.parse('2024-05-20'),
-  paymentMethod: 'Credit Card',
-  deliveryLocation: 'sampleAddress',
-);
-
-Order order2 = Order(
-  orderId: '34783',
-  userId: '4345',
-  shop: shop2,
-  foods: [orderFoodItem3, orderFoodItem4],
-  totalPrice: orderFoodItem3.price + orderFoodItem4.price,
-  date: DateTime.parse('2024-05-21'),
-  paymentMethod: 'Cash on Delivery',
-  deliveryLocation: 'sampleAddress2',
-);
-
-Order order3 = Order(
-  orderId: '87573',
-  userId: '4345',
-  shop: shop3,
-  foods: [orderFoodItem1, orderFoodItem3],
-  totalPrice: orderFoodItem1.price + orderFoodItem3.price,
-  date: DateTime.parse('2024-05-22'),
-  paymentMethod: 'PayPal',
-  deliveryLocation: 'sampleAddress3',
-);
-
 List<Food> foodData = [
   chiliChicken,
   veggiePizza,
@@ -194,4 +161,3 @@ List<Food> foodData = [
   pepperoniPizza
 ];
 List<Shop> shopData = [shop1, shop2, shop3, shop4, shop5, shop6, shop7, shop8];
-List<Order> orderData = [order1, order2, order3];

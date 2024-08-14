@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_fiesta/core/helpers/app_data.dart';
 import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
-import 'package:flavor_fiesta/screens/all_past_orders_screen.dart';
 import 'package:flavor_fiesta/screens/food_management_screen.dart';
 import 'package:flavor_fiesta/screens/home_screen.dart';
 import 'package:flavor_fiesta/screens/order_history_screen.dart';
+import 'package:flavor_fiesta/screens/order_management_screen.dart';
 import 'package:flavor_fiesta/screens/order_now_screen.dart';
 import 'package:flavor_fiesta/screens/profile_screen.dart';
 import 'package:flavor_fiesta/screens/shop_management_screen.dart';
@@ -50,7 +50,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
         const UserManagementScreen(),
         const ShopManagementScreen(),
         const FoodManagementScreen(),
-        const AllPastOrdersScreen(),
+        const OrderManagementScreen(),
         const ProfileScreen(),
       ];
 
@@ -72,8 +72,10 @@ class _NavigatorBarState extends State<NavigatorBar> {
             label: "Foods"),
         BottomNavigationBarItem(
             backgroundColor: AppStyles.paletteDark,
-            icon: const Icon(FluentSystemIcons.ic_fluent_clock_regular),
-            activeIcon: const Icon(FluentSystemIcons.ic_fluent_clock_filled),
+            icon:
+                const Icon(FluentSystemIcons.ic_fluent_checkmark_lock_regular),
+            activeIcon:
+                const Icon(FluentSystemIcons.ic_fluent_checkmark_lock_filled),
             label: "Orders"),
         BottomNavigationBarItem(
             backgroundColor: AppStyles.paletteDark,
@@ -129,4 +131,3 @@ class _NavigatorBarState extends State<NavigatorBar> {
     );
   }
 }
-

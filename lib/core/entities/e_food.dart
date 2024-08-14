@@ -16,6 +16,18 @@ class Food {
       required this.price,
       this.priceInForMd = 0,
       this.priceInForLg = 0});
+  Map<String, dynamic> toMap() {
+    return {
+      'foodId': foodId,
+      'name': name,
+      'availableSizes': availableSizes,
+      'availableToppings': availableToppings,
+      'price': price,
+      'priceInForSm': priceInForSm,
+      'priceInForMd': priceInForMd,
+      'priceInForLg': priceInForLg,
+    };
+  }
 
   @override
   String toString() {

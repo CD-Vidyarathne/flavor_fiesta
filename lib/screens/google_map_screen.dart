@@ -9,7 +9,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class GoogleMapScreen extends StatefulWidget {
-  const GoogleMapScreen({super.key});
+  final List<Shop> shops;
+  const GoogleMapScreen({super.key, required this.shops});
 
   @override
   State<GoogleMapScreen> createState() => _GoogleMapScreenState();
@@ -17,7 +18,6 @@ class GoogleMapScreen extends StatefulWidget {
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
   Location location = Location();
-  final List<Shop> shops = shopData;
   LatLng? currentPosition;
   bool showNearest = true;
 
@@ -110,15 +110,16 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     if (showNearest) {
       return getNearestShops();
     } else {
-      return shops;
+      return widget.shops;
     }
   }
 
   List<Shop> getNearestShops() {
-    shops.sort((a, b) => _calculateDistance(currentPosition!, a.mapLocation)
-        .compareTo(_calculateDistance(currentPosition!, b.mapLocation)));
+    widget.shops.sort((a, b) =>
+        _calculateDistance(currentPosition!, a.mapLocation)
+            .compareTo(_calculateDistance(currentPosition!, b.mapLocation)));
 
-    return shops.take(5).toList();
+    return widget.shops.take(5).toList();
   }
 
   double _calculateDistance(LatLng start, LatLng end) {

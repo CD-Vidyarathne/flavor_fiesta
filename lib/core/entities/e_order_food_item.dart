@@ -30,6 +30,16 @@ class OrderFoodItem {
     return (basePrice + sizePrice + toppingsPrice) * quantity;
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'food': food.name,
+      'selectedSize': selectedSize,
+      'selectedToppings': selectedToppings,
+      'price': price,
+      'quantity': quantity,
+    };
+  }
+
   @override
   String toString() {
     return 'OrderFoodItem(name: $food.name, size: $selectedSize, toppings: $selectedToppings, price: $price)';

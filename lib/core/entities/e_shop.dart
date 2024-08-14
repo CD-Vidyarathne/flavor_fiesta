@@ -12,12 +12,4 @@ class Shop {
     required this.mapLocation,
     List<String>? availableItems,
   }) : availableItems = availableItems ?? [];
-
-  void addFood(String foodId) {
-    availableItems.add(foodId);
-  }
-
-  void removeFood(String foodId) {
-    availableItems.remove(foodId);
-  }
 }

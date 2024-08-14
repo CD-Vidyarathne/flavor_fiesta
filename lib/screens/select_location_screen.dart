@@ -15,7 +15,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(6.9271, 79.8612); // Colombo, Sri Lanka
+  final LatLng _center = const LatLng(6.9271, 79.861);
   LatLng? _selectedLocation;
 
   void _onMapCreated(GoogleMapController controller) {
@@ -42,7 +42,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
+      appBar: const CustomAppbar(
         title: 'Select Location',
       ),
       body: Stack(

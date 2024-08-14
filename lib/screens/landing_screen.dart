@@ -45,10 +45,18 @@ class LandingScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  "Please Log in or sign up to continue.",
-                  style: AppStyles.headLineStyle1
-                      .copyWith(color: AppStyles.paletteMedium),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                  decoration: BoxDecoration(
+                      color: AppStyles.paletteMedium,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(12))),
+                  child: Text(
+                    "Please Login or Signup to continue",
+                    style: AppStyles.headLineStyle1
+                        .copyWith(color: AppStyles.paletteBlack, fontSize: 20),
+                  ),
                 ),
               ],
             )),

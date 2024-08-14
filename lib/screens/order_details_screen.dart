@@ -5,7 +5,7 @@ import 'package:flavor_fiesta/core/widgets/single_ordered_food_item.dart';
 import 'package:flutter/material.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  final Order order;
+  final AppOrder order;
   const OrderDetailsScreen({super.key, required this.order});
 
   @override
@@ -51,7 +51,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         style:
                             AppStyles.textBlackStyle1.copyWith(fontSize: 16)),
                     const SizedBox(width: 10),
-                    Text(order.shop.location,
+                    Text(order.shopId,
                         style: AppStyles.textBlackStyle1.copyWith(
                             fontSize: 16, fontWeight: FontWeight.w400)),
                   ],

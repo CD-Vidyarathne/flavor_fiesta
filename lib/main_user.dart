@@ -17,6 +17,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final String? appFlavor =
+      const String.fromEnvironment('FLUTTER_APP_FLAVOR') != ''
+          ? const String.fromEnvironment('FLUTTER_APP_FLAVOR')
+          : null;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +30,6 @@ class MyApp extends StatelessWidget {
         "/": (context) => const LandingScreen(),
         AppRoutes.login: (context) => const LoginScreen(),
         AppRoutes.signup: (context) => const SignupScreen(),
-        AppRoutes.map: (context) => const GoogleMapScreen(),
         AppRoutes.authenticated: (context) => const NavigatorBar()
       },
     );

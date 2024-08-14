@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flavor_fiesta/core/helpers/helper_functions.dart';
+import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
 import 'package:flavor_fiesta/core/widgets/custom_appbar.dart';
 import 'package:flavor_fiesta/screens/select_location_screen.dart';
@@ -23,22 +26,23 @@ class _AddNewShopScreenState extends State<AddNewShopScreen> {
 
   Future<void> _saveShop() async {
     if (_shopIdController.text.isEmpty || _selectedLocation == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields')),
-      );
+      displayMessageToUser('Please fill all the details.', context);
       return;
     }
 
     try {
-      // Add your Firebase Firestore code here to save the shop
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Shop added successfully')),
-      );
-      Navigator.pop(context);
+      await FirebaseFirestore.instance.collection('Shops').doc().set({
+        'location': _shopIdController.text,
+        'mapLocation': {
+          'latitude': _selectedLocation!.latitude,
+          'longitude': _selectedLocation!.longitude,
+        },
+        'availableItems': [],
+      });
+      Navigator.pushNamed(context, AppRoutes.authenticated);
+      displayMessageToUser('Shop added successfully', context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error adding shop: $e')),
-      );
+      displayMessageToUser('Error adding shop: $e', context);
     }
   }
 
@@ -75,7 +79,8 @@ class _AddNewShopScreenState extends State<AddNewShopScreen> {
                     labelText: 'Branch', focusColor: AppStyles.paletteBlack),
               ),
               const SizedBox(height: 10),
-              Text("Location : $_selectedLocation"),
+              Text(
+                  "Location : ${_selectedLocation ?? "Please select a location on map"}"),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: _openMap,

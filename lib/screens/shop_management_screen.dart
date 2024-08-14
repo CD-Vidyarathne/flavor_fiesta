@@ -1,6 +1,7 @@
 import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
 import 'package:flavor_fiesta/core/widgets/custom_appbar.dart';
+import 'package:flavor_fiesta/screens/single_shop_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -50,7 +51,8 @@ class _ShopManagementScreenState extends State<ShopManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(title: "Shop Management"),
+      appBar:
+          const CustomAppbar(title: "Shop Management", showBackButton: false),
       body: Column(
         children: [
           const SizedBox(height: 10),
@@ -78,11 +80,11 @@ class _ShopManagementScreenState extends State<ShopManagementScreen> {
                 children: _filteredShops.map((shopDoc) {
                   Map<String, dynamic> shopData =
                       shopDoc.data() as Map<String, dynamic>;
+                  String shopId = shopDoc.id.toString();
                   return Card(
                     margin: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      title: Text(shopData['shopId']),
-                      subtitle: Text(shopData['location']),
+                      title: Text(shopData['location']),
                       trailing: ElevatedButton(
                         onPressed: () {
                           // Navigate to the shop management page
@@ -90,12 +92,11 @@ class _ShopManagementScreenState extends State<ShopManagementScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => SingleShopManagementScreen(
-                                shopId: shopData['shopId'],
-                                shopData: shopData,
-                              ),
+                                  shopData: shopData, shopId: shopId),
                             ),
                           );
                         },
+                        style: AppStyles.darkButton,
                         child: const Text('Manage'),
                       ),
                     ),
@@ -105,30 +106,6 @@ class _ShopManagementScreenState extends State<ShopManagementScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SingleShopManagementScreen extends StatelessWidget {
-  final String shopId;
-  final Map<String, dynamic> shopData;
-
-  const SingleShopManagementScreen({
-    super.key,
-    required this.shopId,
-    required this.shopData,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Manage Shop: $shopId'),
-      ),
-      body: Center(
-        child: Text('Details for shop $shopId'),
-        // Implement the rest of the UI for managing a single shop here
       ),
     );
   }

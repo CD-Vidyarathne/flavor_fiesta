@@ -47,14 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
           bool isAdmin = await checkUserIsAdmin(loggedEmail);
 
           if (isAdmin) {
-            Navigator.pushNamed(context,
-                AppRoutes.authenticated); // Navigate to an admin-specific route
+            Navigator.pushNamed(context, AppRoutes.authenticated);
           } else {
             displayMessageToUser("User is not an admin", context);
           }
         }
       } else if (appFlavor == "user") {
-        displayMessageToUser("Login Success", context);
+        Navigator.pushNamed(context, AppRoutes.authenticated);
       }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
