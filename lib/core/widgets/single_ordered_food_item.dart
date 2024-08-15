@@ -3,7 +3,7 @@ import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class SingleOrderFoodItem extends StatelessWidget {
-  final OrderFoodItem item;
+  final Map<String, dynamic> item;
   const SingleOrderFoodItem({super.key, required this.item});
 
   @override
@@ -23,19 +23,19 @@ class SingleOrderFoodItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(item.food.name, style: AppStyles.textBlackStyle1),
+          Text(item["food"], style: AppStyles.textBlackStyle1),
           const SizedBox(height: 10.0),
-          Text('Size: ${item.selectedSize}', style: AppStyles.textBlackStyle2),
-          const SizedBox(height: 10.0),
-          Text('Toppings: ${item.selectedToppings.join(', ')}',
-              style: AppStyles.textBlackStyle2),
-          const SizedBox(height: 10.0),
+          // Text('Size: ${item.selectedSize}', style: AppStyles.textBlackStyle2),
+          // const SizedBox(height: 10.0),
+          // Text('Toppings: ${item.selectedToppings.join(', ')}',
+          //     style: AppStyles.textBlackStyle2),
+          // const SizedBox(height: 10.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Price:',
                   style: AppStyles.textBlackStyle1.copyWith(fontSize: 16)),
-              Text(item.price.toStringAsFixed(2),
+              Text(item["price"].toStringAsFixed(2),
                   style: AppStyles.textBlackStyle1.copyWith(fontSize: 16)),
             ],
           )

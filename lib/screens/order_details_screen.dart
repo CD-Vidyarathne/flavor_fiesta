@@ -75,7 +75,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         style:
                             AppStyles.textBlackStyle1.copyWith(fontSize: 16)),
                     const SizedBox(width: 10),
-                    Text(order.date.toLocal().toString().split(' ')[0],
+                    Text(order.date,
                         style: AppStyles.textBlackStyle1.copyWith(
                             fontSize: 16, fontWeight: FontWeight.w400)),
                   ],

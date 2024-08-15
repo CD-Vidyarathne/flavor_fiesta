@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavor_fiesta/core/res/media/app_media.dart';
 import 'package:flavor_fiesta/core/res/routes/app_routes.dart';
@@ -37,6 +38,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void logoutUser() {
     FirebaseAuth.instance.signOut();
     Navigator.pushNamed(context, AppRoutes.login);
+  }
+
+  void _updateAddress() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(user.email)
+            .update({'defaultAddress': addressController.text});
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Address updated successfully!')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update address: $e')),
+      );
+    }
+  }
+
+  void _changePassword() async {
+    if (newPasswordController.text != confirmNewPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('New passwords do not match.')),
+      );
+      return;
+    }
+
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      final cred = EmailAuthProvider.credential(
+        email: user!.email!,
+        password: currentPasswordController.text,
+      );
+
+      await user.reauthenticateWithCredential(cred);
+      await user.updatePassword(newPasswordController.text);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password updated successfully!')),
+      );
+
+      currentPasswordController.clear();
+      newPasswordController.clear();
+      confirmNewPasswordController.clear();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update password: $e')),
+      );
+    }
   }
 
   @override
@@ -103,16 +154,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          _pickImageFromGallery();
-                        },
+                        onPressed: _pickImageFromGallery,
                         style: AppStyles.lightButton,
                         child: const Text('Add Photo'),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          _pickImageFromCamera();
-                        },
+                        onPressed: _pickImageFromCamera,
                         style: AppStyles.lightButton,
                         child: const Text('Take Photo'),
                       ),
@@ -121,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle confirm logic
+                      // Handle confirm logic for the profile picture
                     },
                     style: AppStyles.darkButton,
                     child: const Text('Confirm'),
@@ -157,9 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 16.0),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle confirm logic
-                    },
+                    onPressed: _updateAddress,
                     style: AppStyles.darkButton,
                     child: const Text('Confirm'),
                   ),
@@ -213,9 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 16.0),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle confirm logic
-                    },
+                    onPressed: _changePassword,
                     style: AppStyles.darkButton,
                     child: const Text('Confirm'),
                   ),
@@ -236,7 +279,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future _pickImageFromGallery() async {
+  Future<void> _pickImageFromGallery() async {
     final returnImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnImage == null) return;
@@ -246,7 +289,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  Future _pickImageFromCamera() async {
+  Future<void> _pickImageFromCamera() async {
     final returnImage =
         await ImagePicker().pickImage(source: ImageSource.camera);
     if (returnImage == null) return;
@@ -256,3 +299,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 }
+

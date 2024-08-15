@@ -280,7 +280,7 @@ class _OrderNowScreenState extends State<OrderNowScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ViewCartScreen(
                                             cart: cart,
-                                            shopId: selectedShop.shopId)),
+                                            shopId: selectedShop.location)),
                                   );
                                 },
                                 style: AppStyles.lightButton,
@@ -333,4 +333,3 @@ class _OrderNowScreenState extends State<OrderNowScreen> {
     );
   }
 }
-

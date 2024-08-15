@@ -20,13 +20,13 @@ class SingleOrderCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Text(
+            //   "Order ID : #${order.orderId}",
+            //   style: AppStyles.textBlackStyle1,
+            // ),
+            // const SizedBox(height: 10.0),
             Text(
-              "Order ID : #${order.orderId}",
-              style: AppStyles.textBlackStyle1,
-            ),
-            const SizedBox(height: 10.0),
-            Text(
-              "${order.foods[0].food.name}....",
+              "${order.foods[0]["food"]}....",
               style: AppStyles.textBlackStyle1,
             ),
             const SizedBox(height: 10.0),
@@ -41,7 +41,7 @@ class SingleOrderCard extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             Text(
-              order.date.toLocal().toString().split(' ')[0],
+              order.date,
               style: AppStyles.textBlackStyle2,
             ),
             const SizedBox(height: 10.0),

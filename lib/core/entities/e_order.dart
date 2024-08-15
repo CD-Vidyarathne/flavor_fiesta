@@ -8,7 +8,7 @@ class AppOrder {
   final List<dynamic> foods;
   final double totalPrice;
   String? promoCode;
-  final DateTime date;
+  final date;
   final String paymentMethod;
   final String deliveryLocation;
   String status;
