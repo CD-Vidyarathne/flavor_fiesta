@@ -4,6 +4,7 @@ import 'package:flavor_fiesta/core/helpers/helper_functions.dart';
 import 'package:flavor_fiesta/core/res/styles/app_styles.dart';
 import 'package:flavor_fiesta/core/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class OrderManagementScreen extends StatefulWidget {
   const OrderManagementScreen({super.key});
@@ -162,7 +163,25 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> {
     }
   }
 
-  void _updateOrderStatus(AppOrder order, String status) {
+  void sendEmail(String body, String userEmail) async {
+    final Email email = Email(
+      body: body,
+      subject: 'Flutter Fiesta Order Status',
+      recipients: [userEmail],
+      isHTML: false,
+    );
+    String platformResponse;
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'Success';
+      displayMessageToUser(platformResponse, context);
+    } catch (error) {
+      platformResponse = error.toString();
+      displayMessageToUser(platformResponse, context);
+    }
+  }
+
+  void _updateOrderStatus(AppOrder order, String status) async {
     final firestore = FirebaseFirestore.instance;
 
     // Update the order status
@@ -176,7 +195,11 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> {
 
       // If the status is "Completed", update the user's previousOrders
       if (status == "Completed") {
+        sendEmail('Your order is completed', order.userEmail);
         _updateUserPreviousOrders(order.userEmail, order.orderId);
+      }
+      if (status == "Ongoing") {
+        sendEmail('Your order is Accepted. Order Processing.', order.userEmail);
       }
     }).catchError((error) {
       displayMessageToUser("Something went wrong.", context);
